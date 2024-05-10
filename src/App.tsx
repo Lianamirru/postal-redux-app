@@ -6,10 +6,12 @@ import {
 } from "react-router-dom";
 
 import { Layout } from "./components/Layout";
-import { UsersList } from "./features/users/UsersList";
-import { UserProfile } from "./features/users/UserProfile";
-import { PostsList } from "./features/posts/PostsList";
-// import { SinglePostPage } from "./features/posts/SinglePostPage";
+import { UsersList } from "./components/users/UsersList";
+import { UserProfile } from "./components/users/UserProfile";
+import { PostsList } from "./components/posts/PostsList";
+import { PostPage } from "./components/posts/SinglePostPage";
+import EditPostForm from "./components/posts/EditPostForm";
+import { AddPostForm } from "./components/posts/AddPostForm";
 
 const App = () => {
   return (
@@ -20,12 +22,16 @@ const App = () => {
 
           <Route path="users">
             <Route index element={<UsersList />} />
-            <Route path="/users/:userId" element={<UserProfile />} />
+            <Route path=":userId" element={<UserProfile />} />
           </Route>
 
           <Route path="posts">
             <Route index element={<PostsList />} />
-            {/* <Route path=":postId" element={<SinglePostPage />} /> */}
+            <Route path=":postId" element={<PostPage />} />
+            <Route path="new" element={<AddPostForm />} />
+            <Route path="edit">
+              <Route path=":postId" element={<EditPostForm />} />
+            </Route>
           </Route>
           {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
         </Route>
